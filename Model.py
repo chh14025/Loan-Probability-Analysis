@@ -146,6 +146,44 @@ model_results = pd.DataFrame([['Random Forest (n = 100)', acc, prec, rec, f1]],
              columns = ["Model", "Accuracy", "Precision", "Recall", "F1"])
 results = results.append(model_results,ignore_index = True)
 
+#Grid Search --------------------------------------
+
+parameters = {'max_depth': [None],
+              'max_features': [3,5,7],
+              'min_samples_split': [8,10,12],
+              'min_samples_leaf': [1,2,3],
+              'bootstrap': [True],
+              'criterion': ['entropy']
+              }
+
+from sklearn.model_selection import GridSearchCV
+grid_search = GridSearchCV(estimator = classifier,
+                           param_grid = parameters,
+                           scoring = 'accuracy',
+                           cv = 10,
+                           n_jobs = -1)
+
+
+grid_search = grid_search.fit(x_train, y_train)
+
+rf_best_accuracy = grid_search.best_score_
+rf_best_parameters = grid_search.best_params_
+rf_best_accuracy, rf_best_parameters
+
+## Fitting the model with the *best* parameters
+
+y_pred = grid_search.predict(x_test)
+
+
+acc = accuracy_score(y_test, y_pred)
+prec = precision_score(y_test, y_pred)
+rec = recall_score(y_test,y_pred)
+f1 = f1_score(y_test,y_pred)
+
+model_results = pd.DataFrame([['Random Forest (n = 100, GSx2 + Entropy)', acc, prec, rec, f1]],
+             columns = ["Model", "Accuracy", "Precision", "Recall", "F1"])
+results = results.append(model_results,ignore_index = True)
+
 
 #XGBoost
 from xgboost import XGBClassifier
@@ -197,5 +235,11 @@ f1 = f1_score(y_test,y_pred)
 model_results = pd.DataFrame([['ANN', acc, prec, rec, f1]],
              columns = ["Model", "Accuracy", "Precision", "Recall", "F1"])
 results = results.append(model_results,ignore_index = True)
+
+
+
+
+pd.set_option('display.max_columns', None)
+results
 
 
