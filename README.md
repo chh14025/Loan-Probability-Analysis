@@ -61,12 +61,12 @@ Here find a lot of valuable information, let's break down the variables that sto
 **Age** - The majority of loan applicants are bettween the ages of 30 and 50. <br />
 **Home Owner** - There are less home owners than there are none-home owners. <br />
 **Income** - The income of this group of loan applicants lies between 15k to 60k with incriments of ~5k. <br />
-**Years Employed** - Most of the applicants has worked less than 7 years. <br />
+**Years Employed** - Most of the applicants had worked less than 7 years. <br />
 **Personal Account(Year)** - Most of the loan applicants have two or fewer accounts. A small bump in numbers of applicants with 6 accounts.<br />
-**Has Debt** - A very large majority of applicants have debt. <br />
-**Amount Requested** - The amount requested is mostly between 1k to 15k. <br />
+**Has Debt** - A very large majority of applicants have debts. <br />
+**Amount Requested** - The amounts requested are mostly between 1k to 15k. <br />
 **Risk Score** - The risk scores are in the 60k region. <br />
-**Inquires Last Month** - Inquires within the last month is between 2 to 10. <br />
+**Inquires Last Month** - Inquires within the last month were between 2 to 10. <br />
 
 
 
