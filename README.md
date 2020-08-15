@@ -14,7 +14,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 %matplotlib qt
 ```
-read the Financial_Data.csv file and get a better idea of what kind of data we are dealing with by using :
+read the Financial_Data.csv file and get a better idea of what kind of data we are dealing with by using :<br />
 
 dataset = pd.read_csv('Financial_Data.csv') 
 dataset.describe()
@@ -22,18 +22,18 @@ dataset.describe()
 ![](Images/Desc.png)
 
 
-We then clean up the data a bit by looking for any N/A data in our columns
+We then clean up the data a bit by looking for any N/A data in our columns<br />
 
 ```python
 dataset.isna().any()
 ```
 
-Fortunate for us, the data-set we have is clean and contains no N/A data.
+Fortunate for us, the data-set we have is clean and contains no N/A data.<br />
 
-Moving on, we will generate a list of Histograms of known variables to see if we can find any patterns
-To do this we first need to drop columns containing identifiers or dependent variables
+Moving on, we will generate a list of Histograms of known variables to see if we can find any patterns, <br />
+To do this we first need to drop columns containing identifiers or dependent variables. <br />
 
-dataset2 = dataset.drop(columns = ['entry_id', 'pay_schedule', 'e_signed'])
+dataset2 = dataset.drop(columns = ['entry_id', 'pay_schedule', 'e_signed']) <br />
 
 With all the columns preped, we can generate a grid of histograms
 
@@ -56,17 +56,17 @@ plt.tight_layout(rect = [0,0.1,1,0.9])
 
 ![](Images/Desc.png)
 
-Here find a lot of valuable information, let's break down the variables that stood out:
+Here find a lot of valuable information, let's break down the variables that stood out:<br />
 
-Age - The majority of loan applicants are bettween the ages of 30 and 50. 
-Home Owner - There are less home owners than there are none-home owners 
-Income - The income of this group of loan applicants lies between 15k to 60k with incriments of ~5k
-Years Employed - Most of the applicants has worked less than 7 years
-Personal Account(Year) - Most of the loan applicants have two or fewer accounts. A small bump in numbers of applicants with 6 accounts.
-Has Debt - A very large majority of applicants have debt
-Amount Requested - The amount requested is mostly between 1k to 15k
-Risk Score - The risk scores are in the 60k region
-Inquires Last Month - Inquires within the last month is between 2 to 10
+_Age_ - The majority of loan applicants are bettween the ages of 30 and 50. <br />
+_Home Owner_ - There are less home owners than there are none-home owners. <br />
+_Income_ - The income of this group of loan applicants lies between 15k to 60k with incriments of ~5k. <br />
+_Years Employed_ - Most of the applicants has worked less than 7 years. <br />
+_Personal Account(Year)_ - Most of the loan applicants have two or fewer accounts. A small bump in numbers of applicants with 6 accounts.<br />
+_Has Debt_ - A very large majority of applicants have debt. <br />
+_Amount Requested_ - The amount requested is mostly between 1k to 15k. <br />
+_Risk Score_ - The risk scores are in the 60k region. <br />
+_Inquires Last Month_ - Inquires within the last month is between 2 to 10. <br />
 
 
 
