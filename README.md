@@ -54,7 +54,7 @@ plt.tight_layout(rect = [0,0.1,1,0.9])
 
 ```
 
-![](Images/Desc.png)
+![](Images/Hist.png)
 
 Here find a lot of valuable information, let's break down the variables that stood out:<br />
 
