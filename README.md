@@ -60,15 +60,17 @@ plt.tight_layout(rect = [0,0.1,1,0.9])
 
 Here find a lot of valuable information, let's break down the variables that stood out:<br />
 
-**Age** - The majority of loan applicants are bettween the ages of 30 and 50. <br />
-**Home Owner** - There are less home owners than there are none-home owners. <br />
-**Income** - The income of this group of loan applicants lies between 15k to 60k with incriments of ~5k. <br />
-**Years Employed** - Most of the applicants had worked less than 7 years. <br />
-**Personal Account(Year)** - Most of the loan applicants have accounts for fewer than 4 years. A small bump in numbers of applicants with 6 year old accounts.<br />
-**Has Debt** - A very large majority of applicants have debts. <br />
-**Amount Requested** - The amounts requested are mostly between 1k to 15k. <br />
-**Risk Score** - The risk scores are in the 60k region. <br />
-**Inquires Last Month** - Inquires within the last month were between 2 to 10. <br />
+Variable Analysis: <br />
+
+1. **Age** - The majority of loan applicants are bettween the ages of 30 and 50. <br />
+2. **Home Owner** - There are less home owners than there are none-home owners. <br />
+3. **Income** - The income of this group of loan applicants lies between 15k to 60k with incriments of ~5k. <br />
+4. **Years Employed** - Most of the applicants had worked less than 7 years. <br />
+5. **Personal Account(Year)** - Most of the loan applicants have accounts for fewer than 4 years. A small bump in numbers of applicants with 6 year old accounts.<br />
+6. **Has Debt** - A very large majority of applicants have debts. <br />
+7. **Amount Requested** - The amounts requested are mostly between 1k to 15k. <br />
+8. **Risk Score** - The risk scores are in the 60k region. <br />
+9. **Inquires Last Month** - Inquires within the last month were between 2 to 10. <br />
 
 ### Analysis
 
