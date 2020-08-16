@@ -91,10 +91,34 @@ dataset2.corrwith(dataset.e_signed).plot.bar(
 
 ### Analysis
 
-Age has strong inverse correlation with the result of whether the person passes the e-signning phase. This make sense as older adults can be more impatient and less likely to get to the e-signing page. The length of personal accounts, both in year and month are negative correlated with the results as well. Debt level, amounts requested and risk score are all positvely correlated with the dependent variable. These variables are potential signs of desperation, which makes sense for the loan applicants to get to the e-signing stage and sign off on a loan.
+Age has strong inverse correlation with the result of whether the person passes the e-signning phase. This make sense as older adults can be more impatient and less likely to get to the e-signing page. The length of personal accounts, both in year and month are negative correlated with the results as well. Debt level, amounts requested and risk score are all positvely correlated with the dependent variable. These variables are potential signs of desperation, which makes sense for the loan applicants to get to the e-signing stage and sign off on a loan.<br />
+
+***Correlation Matrix
+
+Let's now take a closer look at the variables and how they correlate with one another by creating a correlation matrix. <br />
+To do this, we need the following code
+
+```python
+#Correlation Matrix
+sns.set(style = 'white')
+
+corr = dataset2.corr()
+
+mask = np.zeros_like(corr, dtype = np.bool)
+mask[np.triu_indices_from(mask)] = True
+
+f, ax = plt.subplots()
+
+cmap = sns.diverging_palette(220,10,as_cmap = True)
+
+sns.heatmap(corr,mask = mask, cmap = cmap, vmax = 0.3, center =0,
+            square = True, linewidths = 0.5, cbar_kws = {"shrink": .5})
+```
+
+![](Images/Heat.png) 
 
 
-
+Few things from this correlation matrix that stood out. Amount requested is highly correlated with income, that means the more applicants made per month, the more likely they will request for a higher amount of loan. Years employed is strongly correlated with the current address year, and this makes sense because a persons likelyhood of moving while staying at the same job won't be too high. Amount requested is strongly correlated with loan applicants' risk scores, and the risk scores are correlated with one another. This also makes sense because if one of the risk scores is extremely high for an applicant, chances are the risk score from other categories for the same applicant won't be low. The correlation make sense, therefore no removal of fields is necessary.
 
 
 
