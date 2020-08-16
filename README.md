@@ -79,7 +79,7 @@ dataset2.corrwith(dataset.e_signed).plot.bar(
     title = 'Correlation with E-signed')
 ```
 
-![](Images/Corr.png)
+![](Images/Corr.png) 
 
 Age has strong inverse correlation with the result of whether the person passes the e-signning phase. This make sense as older adults can be more impatient and less likely to get to the e-signing page. The length of personal accounts, both in year and month are negative correlated with the results as well. Debt level, amounts requested and risk score are all positvely correlated with the dependent variable. These variables are potential signs of desperation, which makes sense for the loan applicants to get to the e-signing stage and sign off on a loan.
 
