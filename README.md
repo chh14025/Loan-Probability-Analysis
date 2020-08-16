@@ -62,21 +62,21 @@ Here find a lot of valuable information, let's break down the variables that sto
 
 Variable Analysis: <br />
 
-1. **Age** - The majority of loan applicants are bettween the ages of 30 and 50. <br />
-2. **Home Owner** - There are less home owners than there are none-home owners. <br />
-3. **Income** - The income of this group of loan applicants lies between 15k to 60k with incriments of ~5k. <br />
-4. **Years Employed** - Most of the applicants had worked less than 7 years. <br />
-5. **Personal Account(Year)** - Most of the loan applicants have accounts for fewer than 4 years. A small bump in numbers of applicants with 6 year old accounts.<br />
-6. **Has Debt** - A very large majority of applicants have debts. <br />
-7. **Amount Requested** - The amounts requested are mostly between 1k to 15k. <br />
-8. **Risk Score** - The risk scores are in the 60k region. <br />
-9. **Inquires Last Month** - Inquires within the last month were between 2 to 10. <br />
+    1. **Age** - The majority of loan applicants are bettween the ages of 30 and 50. <br />
+    2. **Home Owner** - There are less home owners than there are none-home owners. <br />
+    3. **Income** - The income of this group of loan applicants lies between 15k to 60k with incriments of ~5k. <br />
+    4. **Years Employed** - Most of the applicants had worked less than 7 years. <br />
+    5. **Personal Account(Year)** - Most of the loan applicants have accounts for fewer than 4 years. A small bump in numbers of applicants with 6 year old accounts.<br />
+    6. **Has Debt** - A very large majority of applicants have debts. <br />
+    7. **Amount Requested** - The amounts requested are mostly between 1k to 15k. <br />
+    8. **Risk Score** - The risk scores are in the 60k region. <br />
+    9. **Inquires Last Month** - Inquires within the last month were between 2 to 10. <br />
 
 ### Analysis
 
-We have a very interesting data set. The applicants are mostly in their prime age between 30 to fifty, but the majority had been employed for fewer than 6 years. It's uncertain, however, whether the data is showing the total years of employment or just the current position. We don't know what type of loan application the data represents, but we can rule out some major loans such as housing morgage or business loans simply from the amounts requested. The stability of these applicants can be a bit concerning due to the fact that more than half are not home owners, and have lived in the current address for less than 3 years. All the applicants have debt, but the amounts owed are unknown. Inquires since last month can be a subject of concern depending on the loan type as an average of 5 inquires within the span of a month is a potential indication of desperation, depending on the loan. Depends on how the data's collected, the length of personal accounts can also be a subject of concern as the average length of 3 years in a group of applicants averaging 40 years of age is quite miniscule. <br />
-
-The information provided by the loan applicants showed that this loan is attracting people with above average risk, something that is indicated by the risk score. The goal of this analysis is to identify the likelyhood of applicants who will get to the e-sign stage and workout a strategy to get more people to sign off on the loan, therefore business should have already evaluated the potential risk associated with this group of applicants. If not, this analysis can be a good start for the optimization of the loan requirements.  <br />
+    We have a very interesting data set. The applicants are mostly in their prime age between 30 to fifty, but the majority had been employed for fewer than 6 years. It's uncertain, however, whether the data is showing the total years of employment or just the current position. We don't know what type of loan application the data represents, but we can rule out some major loans such as housing morgage or business loans simply from the amounts requested. The stability of these applicants can be a bit concerning due to the fact that more than half are not home owners, and have lived in the current address for less than 3 years. All the applicants have debt, but the amounts owed are unknown. Inquires since last month can be a subject of concern depending on the loan type as an average of 5 inquires within the span of a month is a potential indication of desperation, depending on the loan. Depends on how the data's collected, the length of personal accounts can also be a subject of concern as the average length of 3 years in a group of applicants averaging 40 years of age is quite miniscule. <br />
+    
+    The information provided by the loan applicants showed that this loan is attracting people with above average risk, something that is indicated by the risk score. The goal of this analysis is to identify the likelyhood of applicants who will get to the e-sign stage and workout a strategy to get more people to sign off on the loan, therefore business should have already evaluated the potential risk associated with this group of applicants. If not, this analysis can be a good start for the optimization of the loan requirements.  <br />
 
 ### Correlation
 
