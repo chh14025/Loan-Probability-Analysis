@@ -1,4 +1,4 @@
-# Loan-Probability-Analysis
+# Loan-Probability-Analysis - ReadMe in progress
 E-signing a loan based on Financial History Probability Analysis
 
 __A logistic regression machine learning model that explores the likelyhood of loan applicants that will go through with the final E-signing phase based on their financial data - 63% accuracy__
