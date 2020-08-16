@@ -30,6 +30,8 @@ dataset.isna().any()
 
 Fortunate for us, the data-set we have is clean and contains no N/A data.<br />
 
+### Graph Analysis
+
 Moving on, we will generate a list of Histograms of known variables to see if we can find any patterns, <br />
 To do this we first need to drop columns containing identifiers or dependent variables. <br />
 
@@ -68,9 +70,13 @@ Here find a lot of valuable information, let's break down the variables that sto
 **Risk Score** - The risk scores are in the 60k region. <br />
 **Inquires Last Month** - Inquires within the last month were between 2 to 10. <br />
 
+### Analysis
+
 We have a very interesting data set. The applicants are mostly in their prime age between 30 to fifty, but the majority had been employed for fewer than 6 years. It's uncertain, however, whether the data is showing the total years of employment or just the current position. We don't know what type of loan application the data represents, but we can rule out some major loans such as housing morgage or business loans simply from the amounts requested. The stability of these applicants can be a bit concerning due to the fact that more than half are not home owners, and have lived in the current address for less than 3 years. All the applicants have debt, but the amounts owed are unknown. Inquires since last month can be a subject of concern depending on the loan type as an average of 5 inquires within the span of a month is a potential indication of desperation, depending on the loan. Depends on how the data's collected, the length of personal accounts can also be a subject of concern as the average length of 3 years in a group of applicants averaging 40 years of age is quite miniscule. <br />
 
 The information provided by the loan applicants showed that this loan is attracting people with above average risk, something that is indicated by the risk score. The goal of this analysis is to identify the likelyhood of applicants who will get to the e-sign stage and workout a strategy to get more people to sign off on the loan, therefore business should have already evaluated the potential risk associated with this group of applicants. If not, this analysis can be a good start for the optimization of the loan requirements.  <br />
+
+### Correlation
 
 Now let's take a look at the correlation between the data we just explored and their correlation with the dependent variable. <br />
 
