@@ -121,4 +121,34 @@ sns.heatmap(corr,mask = mask, cmap = cmap, vmax = 0.3, center =0,
 Few things from this correlation matrix that stood out. Amount requested is highly correlated with income, that means the more applicants made per month, the more likely they will request for a higher amount of loan. Years employed is strongly correlated with the current address year, and this makes sense because a persons likelyhood of moving while staying at the same job won't be too high. Amount requested is strongly correlated with loan applicants' risk scores, and the risk scores are correlated with one another. This also makes sense because if one of the risk scores is extremely high for an applicant, chances are the risk score from other categories for the same applicant won't be low. The correlation make sense, therefore no removal of fields is necessary.
 
 
+### Feature Engineering
+
+Let's get the data ready for model building. <br />
+We will use a seperate file for the modeling process. <br />
+
+To start, we will import the codes and raw data.
+
+```python
+import numpy as np
+import seaborn as sns
+import matplotlib.pyplot as plt
+import pandas as pd
+%matplotlib qt
+
+
+dataset = pd.read_csv('Financial_Data.csv') 
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
 
