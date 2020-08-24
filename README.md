@@ -164,7 +164,7 @@ dataset = dataset.drop(columns = ['e_signed','entry_id'])
 
 Note here that I took out the e_signed as the dependent variable. I also took out entry_id that will be used as reference for data frame later.<br />
 
-###Feature Scaling 
+### Feature Scaling 
 
 ```
 from sklearn.model_selection import train_test_split
@@ -191,7 +191,8 @@ del x_train1, x_test1
 Here we split the data into training sets and test sets. We scale the data with StandardScaler.<br />
 The newly scaled dataset doesn't carry-over the column headers, so to make it more readable we set the new scaled train & test data as data frames, then fit the column values from the unscaled data frame into the new data frame. <br />
 
-###LogisticRegression
+### LogisticRegression
+
 Now we have the data ready, it's time to build our models. We want to start off easy by using simple linear regression: <br />
 
 ```
@@ -213,7 +214,7 @@ results = pd.DataFrame([['Linear Regression(Lasso)', acc, prec, rec, f1]],
 
 Note that because we will be constructing different models, so instead of yielding one result per model, we created a data frame called results where we can append all the results based on the model name, the accuracy score, the precision score, the recall score and the f1 score. 
 
-###SVM
+### SVM
 
 ```
 from sklearn.svm import SVC
@@ -231,7 +232,7 @@ model_results = pd.DataFrame([['SVM (Linear)', acc, prec, rec, f1]],
 results = results.append(model_results,ignore_index = True)
 ```
 
-###RBF
+### RBF
 ```
 classifier = SVC(kernel = 'rbf', random_state = 0)
 classifier.fit(x_train, y_train)
@@ -248,7 +249,7 @@ model_results = pd.DataFrame([['SVM (RBF)', acc, prec, rec, f1]],
 results = results.append(model_results,ignore_index = True)
 ```
 
-###KNN
+### KNN
 ```
 from sklearn.neighbors import KNeighborsClassifier
 classifier = KNeighborsClassifier(n_neighbors = 5, metric = 'minkowski', p = 2)
@@ -267,7 +268,7 @@ model_results = pd.DataFrame([['KNN (neighbors = 5)', acc, prec, rec, f1]],
 results = results.append(model_results,ignore_index = True)
 ```
 
-###Naive
+### Naive
 ```
 from sklearn.naive_bayes import GaussianNB
 classifier = GaussianNB()
@@ -285,7 +286,7 @@ model_results = pd.DataFrame([['Naive Bayes', acc, prec, rec, f1]],
 results = results.append(model_results,ignore_index = True)
 ```
 
-###Random Forest
+### Random Forest
 ```
 from sklearn.ensemble import RandomForestClassifier
 classifier = RandomForestClassifier(n_estimators = 100, criterion = 'entropy', random_state = 0)
@@ -303,7 +304,7 @@ model_results = pd.DataFrame([['Random Forest (n = 100)', acc, prec, rec, f1]],
 results = results.append(model_results,ignore_index = True)
 ```
 
-####Grid Search
+#### Grid Search
 ```
 parameters = {'max_depth': [None],
               'max_features': [3,5,7],
@@ -343,7 +344,7 @@ results = results.append(model_results,ignore_index = True)
 ```
 
 
-###XGBoost
+### XGBoost
 ```
 from xgboost import XGBClassifier
 classifier = XGBClassifier()
@@ -364,7 +365,7 @@ results = results.append(model_results,ignore_index = True)
 ```
 
 
-###ANN
+### ANN
 ```
 import keras
 from keras.models import Sequential
@@ -396,7 +397,7 @@ model_results = pd.DataFrame([['ANN', acc, prec, rec, f1]],
 results = results.append(model_results,ignore_index = True)
 ```
 
-##Final Results
+## Final Results
 ```
 pd.set_option('display.max_columns', None)
 results
