@@ -121,7 +121,7 @@ sns.heatmap(corr,mask = mask, cmap = cmap, vmax = 0.3, center =0,
 Few things from this correlation matrix that stood out. Amount requested is highly correlated with income, that means the more applicants made per month, the more likely they will request for a higher amount of loan. Years employed is strongly correlated with the current address year, and this makes sense because a persons likelyhood of moving while staying at the same job won't be too high. Amount requested is strongly correlated with loan applicants' risk scores, and the risk scores are correlated with one another. This also makes sense because if one of the risk scores is extremely high for an applicant, chances are the risk score from other categories for the same applicant won't be low. The correlation make sense, therefore no removal of fields is necessary.
 
 
-### Feature Engineering
+### Construction of Models
 
 Let's get the data ready for model building. <br />
 We will use a seperate file for the modeling process. <br />
@@ -140,13 +140,267 @@ dataset = pd.read_csv('Financial_Data.csv')
 ```
 
 
+Next we want to manipulate the data containing dates by dropping the months employed and aggregate the length of personal accounts to the exact months <br />
+
+```
+dataset = dataset.drop(columns = 'months_employed')
+dataset['personal_account_months'] = (dataset.personal_account_m + dataset.personal_account_y*12)
+
+dataset[['personal_account_months',"personal_account_m","personal_account_y"]]
+
+dataset = dataset.drop(columns = ['personal_account_m','personal_account_y'])
+```
+
+I did this because months employed data won't be useful to the analysis we perform later, and aggregating the years and months to just months makes the data set cleaner.<br />
+
+With the dataset nice and clean, let's put in dummy variables!
+```
+dataset = pd.get_dummies(dataset,drop_first  = True)
+
+response= dataset['e_signed']
+user = dataset['entry_id']
+dataset = dataset.drop(columns = ['e_signed','entry_id'])
+```
+
+Note here that I took out the e_signed as the dependent variable. I also took out entry_id that will be used as reference for data frame later.<br />
+
+###Feature Scaling 
+
+```
+from sklearn.model_selection import train_test_split
+x_train, x_test, y_train, y_test = train_test_split(dataset,response,test_size = .2, random_state = 0)
+
+from sklearn.preprocessing import StandardScaler
+sc = StandardScaler()
+
+x_train1 = pd.DataFrame(sc.fit_transform(x_train))
+x_test1 = pd.DataFrame(sc.transform(x_test))
+
+x_train1.columns = x_train.columns.values
+x_test1.columns = x_test.columns.values
+
+x_train1.index = x_train.index.values
+x_test1.index = x_test.index.values
+
+x_train = x_train1
+x_test = x_test1
+
+del x_train1, x_test1
+```
+
+Here we split the data into training sets and test sets. We scale the data with StandardScaler.<br />
+The newly scaled dataset doesn't carry-over the column headers, so to make it more readable we set the new scaled train & test data as data frames, then fit the column values from the unscaled data frame into the new data frame. <br />
+
+###LogisticRegression
+Now we have the data ready, it's time to build our models. We want to start off easy by using simple linear regression: <br />
+
+```
+from sklearn.linear_model import LogisticRegression
+classifier = LogisticRegression(penalty= 'l1', random_state=0,solver='liblinear')
+classifier.fit(x_train, y_train)
+
+y_pred = classifier.predict(x_test)
+from sklearn.metrics import accuracy_score, f1_score, precision_score, recall_score
+acc = accuracy_score(y_test, y_pred)
+prec = precision_score(y_test, y_pred)
+rec = recall_score(y_test,y_pred)
+f1 = f1_score(y_test,y_pred)
+
+results = pd.DataFrame([['Linear Regression(Lasso)', acc, prec, rec, f1]],
+             columns = ["Model", "Accuracy", "Precision", "Recall", "F1"])
+
+```
+
+Note that because we will be constructing different models, so instead of yielding one result per model, we created a data frame called results where we can append all the results based on the model name, the accuracy score, the precision score, the recall score and the f1 score. 
+
+###SVM
+
+```
+from sklearn.svm import SVC
+classifier = SVC(kernel = 'linear', random_state = 0)
+classifier.fit(x_train, y_train)
+y_pred = classifier.predict(x_test)
+
+acc = accuracy_score(y_test, y_pred)
+prec = precision_score(y_test, y_pred)
+rec = recall_score(y_test,y_pred)
+f1 = f1_score(y_test,y_pred)
+
+model_results = pd.DataFrame([['SVM (Linear)', acc, prec, rec, f1]],
+             columns = ["Model", "Accuracy", "Precision", "Recall", "F1"])
+results = results.append(model_results,ignore_index = True)
+```
+
+###RBF
+```
+classifier = SVC(kernel = 'rbf', random_state = 0)
+classifier.fit(x_train, y_train)
+y_pred = classifier.predict(x_test)
 
 
+acc = accuracy_score(y_test, y_pred)
+prec = precision_score(y_test, y_pred)
+rec = recall_score(y_test,y_pred)
+f1 = f1_score(y_test,y_pred)
+
+model_results = pd.DataFrame([['SVM (RBF)', acc, prec, rec, f1]],
+             columns = ["Model", "Accuracy", "Precision", "Recall", "F1"])
+results = results.append(model_results,ignore_index = True)
+```
+
+###KNN
+```
+from sklearn.neighbors import KNeighborsClassifier
+classifier = KNeighborsClassifier(n_neighbors = 5, metric = 'minkowski', p = 2)
+classifier.fit(x_train, y_train)
+
+y_pred = classifier.predict(x_test)
 
 
+acc = accuracy_score(y_test, y_pred)
+prec = precision_score(y_test, y_pred)
+rec = recall_score(y_test,y_pred)
+f1 = f1_score(y_test,y_pred)
+
+model_results = pd.DataFrame([['KNN (neighbors = 5)', acc, prec, rec, f1]],
+             columns = ["Model", "Accuracy", "Precision", "Recall", "F1"])
+results = results.append(model_results,ignore_index = True)
+```
+
+###Naive
+```
+from sklearn.naive_bayes import GaussianNB
+classifier = GaussianNB()
+classifier.fit(x_train,y_train)
+
+y_pred = classifier.predict(x_test)
+
+acc = accuracy_score(y_test, y_pred)
+prec = precision_score(y_test, y_pred)
+rec = recall_score(y_test,y_pred)
+f1 = f1_score(y_test,y_pred)
+
+model_results = pd.DataFrame([['Naive Bayes', acc, prec, rec, f1]],
+             columns = ["Model", "Accuracy", "Precision", "Recall", "F1"])
+results = results.append(model_results,ignore_index = True)
+```
+
+###Random Forest
+```
+from sklearn.ensemble import RandomForestClassifier
+classifier = RandomForestClassifier(n_estimators = 100, criterion = 'entropy', random_state = 0)
+classifier.fit(x_train, y_train)
+
+y_pred = classifier.predict(x_test)
+
+acc = accuracy_score(y_test, y_pred)
+prec = precision_score(y_test, y_pred)
+rec = recall_score(y_test,y_pred)
+f1 = f1_score(y_test,y_pred)
+
+model_results = pd.DataFrame([['Random Forest (n = 100)', acc, prec, rec, f1]],
+             columns = ["Model", "Accuracy", "Precision", "Recall", "F1"])
+results = results.append(model_results,ignore_index = True)
+```
+
+####Grid Search
+```
+parameters = {'max_depth': [None],
+              'max_features': [3,5,7],
+              'min_samples_split': [8,10,12],
+              'min_samples_leaf': [1,2,3],
+              'bootstrap': [True],
+              'criterion': ['entropy']
+              }
+
+from sklearn.model_selection import GridSearchCV
+grid_search = GridSearchCV(estimator = classifier,
+                           param_grid = parameters,
+                           scoring = 'accuracy',
+                           cv = 10,
+                           n_jobs = -1)
 
 
+grid_search = grid_search.fit(x_train, y_train)
 
+rf_best_accuracy = grid_search.best_score_
+rf_best_parameters = grid_search.best_params_
+rf_best_accuracy, rf_best_parameters
+
+## Fitting the model with the *best* parameters
+
+y_pred = grid_search.predict(x_test)
+
+
+acc = accuracy_score(y_test, y_pred)
+prec = precision_score(y_test, y_pred)
+rec = recall_score(y_test,y_pred)
+f1 = f1_score(y_test,y_pred)
+
+model_results = pd.DataFrame([['Random Forest (n = 100, GSx2 + Entropy)', acc, prec, rec, f1]],
+             columns = ["Model", "Accuracy", "Precision", "Recall", "F1"])
+results = results.append(model_results,ignore_index = True)
+```
+
+
+###XGBoost
+```
+from xgboost import XGBClassifier
+classifier = XGBClassifier()
+classifier.fit(x_train, y_train)
+
+y_pred = classifier.predict(x_test)
+
+
+acc = accuracy_score(y_test, y_pred)
+prec = precision_score(y_test, y_pred)
+rec = recall_score(y_test,y_pred)
+f1 = f1_score(y_test,y_pred)
+
+
+model_results = pd.DataFrame([['XGBoost', acc, prec, rec, f1]],
+             columns = ["Model", "Accuracy", "Precision", "Recall", "F1"])
+results = results.append(model_results,ignore_index = True)
+```
+
+
+###ANN
+```
+import keras
+from keras.models import Sequential
+from keras.layers import Dense
+
+classifier = Sequential()
+
+classifier.add(Dense(units= 9, kernel_initializer = 'uniform', activation = 'relu', input_dim = 19))
+classifier.add(Dense(units= 9, kernel_initializer = 'uniform', activation = 'relu'))
+classifier.add(Dense(units= 1, kernel_initializer = 'uniform', activation = 'sigmoid'))
+
+classifier.compile(optimizer = 'adam', loss = 'binary_crossentropy', metrics = ['accuracy'])
+
+classifier.fit(x_train,y_train, batch_size= 10, nb_epoch=100)
+
+
+y_pred = classifier.predict(x_test)
+y_pred = (y_pred>0.5)
+
+
+acc = accuracy_score(y_test, y_pred)
+prec = precision_score(y_test, y_pred)
+rec = recall_score(y_test,y_pred)
+f1 = f1_score(y_test,y_pred)
+
+
+model_results = pd.DataFrame([['ANN', acc, prec, rec, f1]],
+             columns = ["Model", "Accuracy", "Precision", "Recall", "F1"])
+results = results.append(model_results,ignore_index = True)
+```
+
+##Final Results
+```
+pd.set_option('display.max_columns', None)
+results
+```
 
 
 
