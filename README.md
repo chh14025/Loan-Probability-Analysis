@@ -402,8 +402,9 @@ results = results.append(model_results,ignore_index = True)
 pd.set_option('display.max_columns', None)
 results
 ```
+![](Images/Results.png) 
 
-
+As we can see in the results that XGBoost has the highest accuracy score, second by the Random Forest optimized by grid search. XGBoost also has the highest precision score. This is to be expected as XGBoost is one of the more effective tools currently around for data processing. We see that ANN has the highest recall score, and both Random Forest & XGBoost ties the highest F1 score. Overall, the most accurate model to use here is XGBoost. It was also a lot easier to impliment as the lines required for the code is quite minimal. 
 
 
 
